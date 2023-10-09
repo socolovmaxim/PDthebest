@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # URL страницы с отзывами
-url = "https://www.livelib.ru/reviews/~2#reviews"
+url = "https://www.livelib.ru/book/1000956830-kladbische-domashnih-zhivotnyh-stiven-king"
 
 # Количество отзывов для каждой оценки (звезд)
 num_reviews_per_rating = 1000
