@@ -5,9 +5,6 @@ from bs4 import BeautifulSoup
 # URL страницы с отзывами
 url = "https://www.livelib.ru/book/1000956830-kladbische-domashnih-zhivotnyh-stiven-king"
 
-headers = {    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-}
-
 # Количество отзывов для каждой оценки (звезд)
 num_reviews_per_rating = 1000
 num_ratings = 5  # От 1 до 5 звезд
