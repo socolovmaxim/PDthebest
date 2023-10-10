@@ -1,12 +1,14 @@
 import os
 import requests
 from bs4 import BeautifulSoup
+import csv
+
 
 # URL страницы с отзывами
 url = "https://www.livelib.ru/book/1000956830-kladbische-domashnih-zhivotnyh-stiven-king"
 
 # Количество отзывов для каждой оценки (звезд)
-num_reviews_per_rating = 10
+num_reviews_per_rating = 1000
 num_ratings = 5  # От 1 до 5 звезд
 
 # Папка для сохранения отзывов
@@ -51,3 +53,32 @@ for rating in range(1, num_ratings + 1):
             book_name = "Book Name"  # Вы можете извлекать имя книги из страницы
             review_text = review.get_text()
             save_review_to_file(rating, review_number, book_name, review_text)
+
+# Определите функцию для создания файла-аннотации
+def create_annotation_csv(output_folder):
+    with open('dataset_annotation.csv', 'w', newline='') as csvfile:
+        csv_writer = csv.writer(csvfile)
+        csv_writer.writerow(['Абсолютный путь', 'Относительный путь', 'Метка класса'])
+
+        for rating in range(1, num_ratings + 1):
+            for review_number in range(num_reviews_per_rating):
+                folder_path = os.path.join(output_folder, str(rating))
+                filename = f"{review_number:04d}.txt"
+                file_path = os.path.join(folder_path, filename)
+                relative_path = os.path.relpath(file_path, os.getcwd())
+                csv_writer.writerow([file_path, relative_path, str(rating)])
+
+# Перебираем оценки (звезды) и сохраняем отзывы
+for rating in range(1, num_ratings + 1):
+    for review_number in range(num_reviews_per_rating):
+        page_url = f"{url}?p={review_number + 1}&rating={rating}"
+
+        reviews = get_reviews(page_url)
+
+        for review in reviews:
+            book_name = "Book Name"  # Вы можете извлекать имя книги из страницы
+            review_text = review.get_text()
+            save_review_to_file(rating, review_number, book_name, review_text)
+
+# Создаем файл-аннотацию
+create_annotation_csv(output_folder)
