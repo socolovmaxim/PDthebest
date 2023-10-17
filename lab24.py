@@ -48,9 +48,3 @@ def download_images(search_query, output_directory, num_pages):
 download_images('rose', 'dataset/rose', 1)
 # Загрузка изображений тюльпанов
 download_images('tulip', 'dataset/tulip', 1)
-
-
-
-#
-
-

@@ -1,9 +1,3 @@
-import os
-import random
-
-def get_next_instance(class_label, dataset_directory):
-    instances = [f for f in os.listdir(dataset_directory) if os.path.isfile(os.path.join(dataset_directory, f)) and class_label in f]
-    if instances:
-        return os.path.join(dataset_directory, random.choice(instances))
-    else:
-        return None
+#4.	Написать скрипт, содержащий функцию, получающую на входе метку класса и 
+#возвращающую следующий экземпляр (путь к нему) этого класса. Экземпляры идут в 
+#любом порядке, но не повторяются. Когда экземпляры заканчиваются, функция возвращает None.
